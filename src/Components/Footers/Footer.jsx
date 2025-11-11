@@ -24,7 +24,7 @@ export const Footer = () => {
 
                 {/* Right Side (Social Links) */}
                 <div className="flex space-x-4 mt-3 sm:mt-0">
-                    <a href="#" aria-label="Twitter-X">
+                    <a href="#" aria-label="X">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

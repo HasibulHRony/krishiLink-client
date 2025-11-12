@@ -11,6 +11,16 @@ export const NavBar = () => {
         <li><NavLink to={"/all-crops"}>AllCrops</NavLink></li>
         <li><NavLink to={"/login"}>LogIn</NavLink></li>
         <li><NavLink to={"/register"}>Register</NavLink></li>
+        {
+            user && user.email ? <>
+            <li><NavLink to={"/profile"}>Profile</NavLink></li>
+            <li><NavLink to={"/add-crops"}>Addcrops</NavLink></li>
+            <li><NavLink to={"/my-posts"}>MyPosts</NavLink></li>
+            <li><NavLink to={"/my-interest"}>MyInterest</NavLink></li>
+            <li><NavLink to={"/crops-details"}>CropDetails</NavLink></li>
+            
+            </> : ""
+        }
     </>
 
     const handleSignOut = () =>{
@@ -31,6 +41,7 @@ export const NavBar = () => {
                         {links}
                     </ul>
                 </div>
+                <img className='w-12 h-12 rounded-full flex justify-center items-center mx-1' src="https://i.ibb.co.com/8DdkRk4D/Screenshot-2025-11-12-070237.png" alt="" />
                 <a className="btn btn-ghost text-xl">KrishiLink</a>
             </div>
             <div className="navbar-center hidden lg:flex">

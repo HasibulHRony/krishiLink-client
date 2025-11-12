@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../../Providers/AuthContext'
+import { updateProfile } from 'firebase/auth';
 
 export const Register = () => {
     const navigate = useNavigate();
-    const { user, loading, setUser, setLoading, userByPassword, signInWithGoogle } = useContext(AuthContext)
+    const { user, updateProfileInfo, userUpdate, setUserUpdate, loading, setUser, setLoading, userByPassword, signInWithGoogle } = useContext(AuthContext)
 
 
     const handleGoogleSignIn=()=>{
@@ -29,6 +30,13 @@ export const Register = () => {
             .then((result) => {
                 console.log(result.user)
                 setUser(result.user)
+                updateProfileInfo(result.user, {
+                    displayName: name,
+                    photoURL: photoLink,
+                }).then(()=>{
+                    const updateCurrentUser = {...result.user, displayName: name, photoURL: photoLink}
+                    setUser(updateCurrentUser)
+                })
                 navigate("/")
             })
             .catch(error => {

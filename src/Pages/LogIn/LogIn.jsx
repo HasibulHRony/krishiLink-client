@@ -23,13 +23,6 @@ export const LogIn = () => {
             })
     }
 
-    // const handleResetPassword = (e) =>{
-    //     const email = e.target.email;
-    //     passwordReset(email)
-    //     .then(data=>console.log(data))
-    // }
-
-
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {

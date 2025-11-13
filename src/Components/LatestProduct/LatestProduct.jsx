@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const LatestProduct = ({ latestProduct }) => {
-    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner, createdAt } = latestProduct;
+    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner, createdAt, _id } = latestProduct;
     const time = new Date(createdAt).toLocaleString()
 
     return (
@@ -24,6 +25,7 @@ const LatestProduct = ({ latestProduct }) => {
                 </div>
                 <p>{time}</p>
             </div>
+            <button className='btn'><Link to={`/crops-details/${_id}`}>View Detail</Link></button>
         </div>
 
     );

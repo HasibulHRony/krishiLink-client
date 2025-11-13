@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router';
 
 export const PostCard = ({ post }) => {
     console.log(post)
-    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner } = post;
+    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner, _id } = post;
     return (
         <div className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
             <img src={image} alt={name} className="w-full h-52 object-cover" />
@@ -21,6 +22,7 @@ export const PostCard = ({ post }) => {
                     <span>Owner: <span className="font-medium text-gray-700">{owner.ownerName}</span></span>
                     <span className="truncate">{owner.ownerEmail}</span>
                 </div>
+                <button className='btn'><Link to={`/crops-details/${_id}`}>View Detail</Link></button>
             </div>
         </div>
     )

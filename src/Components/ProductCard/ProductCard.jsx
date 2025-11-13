@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const ProductCard = ({ crop }) => {
-    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner } = crop;
+    const { name, type, pricePerUnit, unit, quantity, description, location, image, owner, _id } = crop;
 
     console.log(crop)
     return (
@@ -22,6 +23,7 @@ const ProductCard = ({ crop }) => {
                     <span>Owner: <span className="font-medium text-gray-700">{owner.ownerName}</span></span>
                     <span className="truncate">{owner.ownerEmail}</span>
                 </div>
+                <button className='btn'><Link to={`/crops-details/${_id}`}>View Detail</Link></button>
             </div>
         </div>
 

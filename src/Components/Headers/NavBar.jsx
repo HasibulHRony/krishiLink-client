@@ -17,8 +17,6 @@ export const NavBar = () => {
             <li><NavLink to={"/add-crops"}>Addcrops</NavLink></li>
             <li><NavLink to={"/my-posts"}>MyPosts</NavLink></li>
             <li><NavLink to={"/my-interest"}>MyInterest</NavLink></li>
-            <li><NavLink to={"/crops-details"}>CropDetails</NavLink></li>
-            
             </> : ""
         }
     </>

@@ -1,22 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../../Providers/AuthContext'
 import { updateProfile } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 export const Register = () => {
     const navigate = useNavigate();
     const { user, updateProfileInfo, userUpdate, setUserUpdate, loading, setUser, setLoading, userByPassword, signInWithGoogle } = useContext(AuthContext)
+    const [error, setError] = useState("")
 
-
-    const handleGoogleSignIn=()=>{
+    const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(result=>{
-            setUser(result.user)
-            navigate("/")
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+            .then(result => {
+                setUser(result.user)
+                navigate("/")
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
 
@@ -26,6 +27,16 @@ export const Register = () => {
         const email = event.target.email.value
         const photoLink = event.target.photoLink.value
         const password = event.target.password.value
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            setError(
+                "Password must contain at least one uppercase, one lowercase, and be at least 6 characters long."
+            );
+            return;
+        }
+
+
         userByPassword(email, password)
             .then((result) => {
                 console.log(result.user)
@@ -33,19 +44,19 @@ export const Register = () => {
                 updateProfileInfo(result.user, {
                     displayName: name,
                     photoURL: photoLink,
-                }).then(()=>{
-                    const updateCurrentUser = {...result.user, displayName: name, photoURL: photoLink}
+                }).then(() => {
+                    const updateCurrentUser = { ...result.user, displayName: name, photoURL: photoLink }
                     setUser(updateCurrentUser)
                 })
                 navigate("/")
             })
-            .catch(error => {
-                console.log(error.message)
+            .catch((error) => {
+                toast.error(error.message)
             })
-            // .finally(() => {
-            //     setLoading(false)
-            // }
-            // )
+        // .finally(() => {
+        //     setLoading(false)
+        // }
+        // )
         console.log({ name, email, photoLink, password })
     }
 
@@ -68,6 +79,9 @@ export const Register = () => {
                                 <div><p className="link link-hover">Already Have an Account? please <Link to={'/login'} className='cursor-pointer text-blue-500'>Login</Link></p></div>
                                 <button className="btn btn-neutral mt-4">Register</button>
                             </fieldset>
+                            {
+                                error ? <p className='text-center text-sm text-red-500'>{error}</p> : ""
+                            }
                         </form>
                         <p className='text-center'>OR</p>
                         <div>

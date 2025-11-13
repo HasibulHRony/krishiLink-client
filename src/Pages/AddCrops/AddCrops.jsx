@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../../Providers/AuthContext'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 export const AddCrops = () => {
 
@@ -44,7 +45,9 @@ export const AddCrops = () => {
       body: JSON.stringify(formData)
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(data=>{
+      toast.success("Data Added successfully")
+    })
     .catch(error=>console.log(error))
 
     navigate('/my-posts')

@@ -9,25 +9,30 @@ export const NavBar = () => {
     const links = <>
         <li><NavLink to={"/"}>Home</NavLink></li>
         <li><NavLink to={"/all-crops"}>AllCrops</NavLink></li>
-        <li><NavLink to={"/login"}>LogIn</NavLink></li>
-        <li><NavLink to={"/register"}>Register</NavLink></li>
+        {
+            !user || !user.email ? <>
+                <li><NavLink to={"/login"}>LogIn</NavLink></li>
+                <li><NavLink to={"/register"}>Register</NavLink></li>
+            </> : ""
+        }
+
         {
             user && user.email ? <>
-            <li><NavLink to={"/profile"}>Profile</NavLink></li>
-            <li><NavLink to={"/add-crops"}>Addcrops</NavLink></li>
-            <li><NavLink to={"/my-posts"}>MyPosts</NavLink></li>
-            <li><NavLink to={"/my-interest"}>MyInterest</NavLink></li>
+                <li><NavLink to={"/profile"}>Profile</NavLink></li>
+                <li><NavLink to={"/add-crops"}>Addcrops</NavLink></li>
+                <li><NavLink to={"/my-posts"}>MyPosts</NavLink></li>
+                <li><NavLink to={"/my-interest"}>MyInterest</NavLink></li>
             </> : ""
         }
     </>
 
-    const handleSignOut = () =>{
+    const handleSignOut = () => {
         logOutUser()
     }
 
 
     return (
-        <div className="navbar bg-base-100 shadow-sm w-full fixed top-0 left-0 z-50">
+        <div className="navbar bg-base-100 shadow-sm w-full">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

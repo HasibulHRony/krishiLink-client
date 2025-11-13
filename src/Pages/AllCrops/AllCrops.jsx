@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useLoaderData } from 'react-router'
+import { Link, useLoaderData } from 'react-router'
 import ProductCard from '../../Components/ProductCard/ProductCard'
 
 export const AllCrops = () => {
@@ -54,11 +54,23 @@ export const AllCrops = () => {
 
 
       {
-        searchData.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
+        searchData.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 mb-4">
           {
             searchData.map((crop, index) => <ProductCard key={index} crop={crop}></ProductCard>)
           }
-        </div> : <p>No Data Founded!</p>
+        </div> : <div className="flex flex-col max-w-96 mx-auto p-4 items-center justify-center min-h bg-gray-100 text-center px-4">
+          <h2 className="text-3xl font-semibold mb-2">No Data Found!</h2>
+          <p className="text-gray-600 mb-6">
+            The page you are looking for doesn’t exist or an unexpected error has occurred.
+          </p>
+
+          <Link
+            to="/"
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+          >
+            Back to Home
+          </Link>
+        </div>
       }
 
     </div>

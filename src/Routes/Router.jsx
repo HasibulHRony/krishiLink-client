@@ -21,6 +21,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
+                loader: ()=>fetch("http://localhost:3000/latest-posts"),
                 element: <Home></Home>
             },
             {

@@ -41,6 +41,19 @@ export const Register = () => {
             .then((result) => {
                 console.log(result.user)
                 setUser(result.user)
+
+                const newUser = {
+                    name: name,
+                    email: result.user.email,
+                    image: photoLink
+                }
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })
                 updateProfileInfo(result.user, {
                     displayName: name,
                     photoURL: photoLink,
@@ -53,11 +66,10 @@ export const Register = () => {
             .catch((error) => {
                 toast.error(error.message)
             })
-        // .finally(() => {
-        //     setLoading(false)
-        // }
-        // )
-        console.log({ name, email, photoLink, password })
+            .finally(() => {
+                setLoading(false)
+            }
+            )
     }
 
     return (

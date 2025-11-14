@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 const ProductCard = ({ crop }) => {
     const { name, type, pricePerUnit, unit, quantity, description, location, image, owner, _id } = crop;
 
-    console.log(crop)
     return (
         <div className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
             <img src={image} alt={name} className="w-full h-52 object-cover" />

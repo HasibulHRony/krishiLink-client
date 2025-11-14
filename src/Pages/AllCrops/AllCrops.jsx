@@ -24,7 +24,6 @@ export const AllCrops = () => {
       })
   }
 
-  console.log(allCrops)
   return (
     <div>
       <h1 className='text-center text-2xl my-4 font-semibold'>All Crops: {searchData.length}</h1>

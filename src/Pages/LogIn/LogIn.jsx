@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 export const LogIn = () => {
 
-    const { user, setUser, signInWithPassword, signInWithGoogle, passwordReset } = useContext(AuthContext)
+    const { setUser, signInWithPassword, signInWithGoogle, } = useContext(AuthContext)
 
     const navigate = useNavigate()
     const handleSignIn = (event) => {

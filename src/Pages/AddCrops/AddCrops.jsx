@@ -36,7 +36,7 @@ export const AddCrops = () => {
       owner: owner,
     }
 
-    fetch("http://localhost:3000/added-crops", {
+    fetch("https://krishi-link-server-neon.vercel.app/added-crops", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

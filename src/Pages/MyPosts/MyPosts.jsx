@@ -9,7 +9,7 @@ export const MyPosts = () => {
   const editModalRef = useRef(null)
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-posts?email=${user.email}`)
+    fetch(`https://krishi-link-server-neon.vercel.app/my-posts?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setMyPost([...data])
@@ -35,7 +35,7 @@ export const MyPosts = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:3000/all_products/${_id}`, {
+        fetch(`https://krishi-link-server-neon.vercel.app/all_products/${_id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())
@@ -80,7 +80,7 @@ export const MyPosts = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:3000/all_products/${_id}`, {
+        fetch(`https://krishi-link-server-neon.vercel.app/all_products/${_id}`, {
           method: 'PATCH',
           headers: {
             "Content-Type": "application/json",

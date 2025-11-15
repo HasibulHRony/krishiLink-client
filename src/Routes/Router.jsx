@@ -21,12 +21,12 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                loader: ()=>fetch("http://localhost:3000/latest-posts"),
+                loader: ()=>fetch("https://krishi-link-server-neon.vercel.app/latest-posts"),
                 element: <Home></Home>
             },
             {
                 path: "/all-crops",
-                loader: ()=>fetch("http://localhost:3000/added-crops"),
+                loader: ()=>fetch("https://krishi-link-server-neon.vercel.app/added-crops"),
                 element: <AllCrops></AllCrops>
             },
             {
@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/crops-details/:id",
-                loader: ({params})=>fetch(`http://localhost:3000/products-details/${params.id}`),
+                loader: ({params})=>fetch(`https://krishi-link-server-neon.vercel.app/products-details/${params.id}`),
                 element: <PrivateRoutes>
                     <CropDetails></CropDetails>
                 </PrivateRoutes>

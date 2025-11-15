@@ -15,7 +15,7 @@ export const AllCrops = () => {
     console.log(search_input)
     setLoading(true)
 
-    fetch(`http://localhost:3000/search?search=${search_input}`)
+    fetch(`https://krishi-link-server-neon.vercel.app/search?search=${search_input}`)
       .then(res => res.json())
       .then(data => {
         setSearchData([...data])

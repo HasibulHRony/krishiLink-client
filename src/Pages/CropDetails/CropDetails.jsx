@@ -11,6 +11,8 @@ export const CropDetails = () => {
 
   const [totalPrice, setTotalPrice] = useState(0)
 
+  const [controlInterests, setControlInterests] = useState([])
+
 
   const {
     name,
@@ -25,8 +27,20 @@ export const CropDetails = () => {
     createdAt,
     _id,
   } = cropDetails || {};
-  
+
   const formattedDate = new Date(createdAt).toLocaleString();
+
+  useEffect(() => {
+
+    fetch(`https://krishi-link-server-neon.vercel.app/all_products/${_id}/interests`)
+      .then(res => res.json())
+      .then(data => {
+        setControlInterests(data)
+      })
+      .catch(error=>console.log(error.message))
+
+  }, [_id])
+
 
 
 
@@ -47,7 +61,7 @@ export const CropDetails = () => {
     }
 
 
-    fetch('http://localhost:3000/users_interests', {
+    fetch('https://krishi-link-server-neon.vercel.app/users_interests', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +74,6 @@ export const CropDetails = () => {
       })
       .catch(error => console.log(error))
   }
-
 
 
 
@@ -80,7 +93,7 @@ export const CropDetails = () => {
       status: "pending",
     }
 
-    fetch(`http://localhost:3000/all_products/${_id}/interests`, {
+    fetch(`https://krishi-link-server-neon.vercel.app/all_products/${_id}/interests`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -180,26 +193,42 @@ export const CropDetails = () => {
       <div>
         {
           user.email === owner.ownerEmail ?
-            <div className='overflow-x-auto'>
-              <table className="table">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Product</th>
-                    <th>Seller</th>
-                    <th>Bid Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
 
-                </tbody>
-              </table>
+            <div>
 
+              {
+                controlInterests.length > 0 ?
+
+
+                  <div className='overflow-x-auto'>
+                    <table className="table">
+                      {/* head */}
+                      <thead>
+                        <tr>
+                          <th>BuyerName</th>
+                          <th>Quantity</th>
+                          <th>message</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {
+                        controlInterests.map((interest, index)=><tr key={index}>
+                            <td>{interest.userName}</td>
+                            <td>{interest.userEmail}</td>
+                            <td>{interest.quantity}</td>
+                            <td>{interest.message}</td>
+                            <td>accept/reject</td>
+                        </tr>)
+                      }
+                      </tbody>
+                    </table>
+
+                  </div> : <h3 className='text-center my-4 text-2xl font-semibold'> No Interest founded for this product. </h3>
+
+                }
             </div>
-
 
             :
 

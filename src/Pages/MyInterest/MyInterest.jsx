@@ -8,7 +8,7 @@ export const MyInterest = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users_interests?usersEmail=${user.email}`)
+    fetch(`https://krishi-link-server-neon.vercel.app/users_interests?usersEmail=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setMyInterests([...data])

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../../Providers/AuthContext'
-import { updateProfile } from 'firebase/auth';
 import { toast } from 'react-toastify';
 
 export const Register = () => {
@@ -16,7 +15,7 @@ export const Register = () => {
                 navigate("/")
             })
             .catch(error => {
-                console.log(error)
+                toast.error(error.message)
             })
     }
 
@@ -39,7 +38,6 @@ export const Register = () => {
 
         userByPassword(email, password)
             .then((result) => {
-                console.log(result.user)
                 setUser(result.user)
 
                 const newUser = {

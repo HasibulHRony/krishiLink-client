@@ -9,6 +9,7 @@ export const CropDetails = () => {
   const cropDetails = useLoaderData()
   const [isInterested, setInterested] = useState(false)
 
+  const [totalPrice, setTotalPrice] = useState(0)
 
 
   const {
@@ -24,8 +25,44 @@ export const CropDetails = () => {
     createdAt,
     _id,
   } = cropDetails || {};
-  const [totalPrice, setTotalPrice] = useState(0)
+  
   const formattedDate = new Date(createdAt).toLocaleString();
+
+
+
+  const handleTrackUsersInterest = (e) => {
+    e.preventDefault()
+
+    const expectedQuantity = Number(e.target.expectedQuantity.value);
+    const message = e.target.message.value;
+    const interestsInfo = {
+      cropName: name,
+      cropId: _id,
+      usersEmail: user.email,
+      ownerEmail: owner.ownerEmail,
+      ownerName: owner.ownerName,
+      quantityRequested: expectedQuantity,
+      userMessage: message,
+      status: "pending"
+    }
+
+
+    fetch('http://localhost:3000/users_interests', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(interestsInfo)
+    })
+      .then(res => res.json())
+      .then(data => {
+        toast.success("Interests Added successfully")
+      })
+      .catch(error => console.log(error))
+  }
+
+
+
 
   const handleInterest = (e) => {
     e.preventDefault()
@@ -57,10 +94,14 @@ export const CropDetails = () => {
       })
       .catch(error => console.log(error))
 
-    console.log(user)
-    console.log(newInterest)
 
   }
+
+  const handleSubmitInterestForm = (e) => {
+    e.preventDefault();
+    handleInterest(e);
+    handleTrackUsersInterest(e);
+  };
 
 
 
@@ -173,7 +214,7 @@ export const CropDetails = () => {
                   <div className="hero bg-base-200">
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                       <div className="card-body">
-                        <form onSubmit={handleInterest}>
+                        <form onSubmit={handleSubmitInterestForm}>
                           <p className='text-center text-2xl my-4'>Are You Interested? Please inform use: </p>
                           <fieldset className="fieldset">
                             <label className="label">expectedQuantity:</label>

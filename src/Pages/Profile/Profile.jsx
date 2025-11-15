@@ -3,6 +3,7 @@ import { AuthContext } from '../../Providers/AuthContext'
 import { auth } from '../../Firebase/firebase.config'
 import { updateProfile } from 'firebase/auth'
 import { Link } from 'react-router'
+import { toast } from 'react-toastify'
 
 export const Profile = () => {
 
@@ -16,9 +17,9 @@ export const Profile = () => {
     updateProfileInfo(auth.currentUser, { displayName: updatedName, photoURL: updatedPhoto })
       .then(() => {
         setUser({ ...user, displayName: updatedName, photoURL: updatedPhoto })
-        alert('successfully changed information')
+        toast.success('successfully changed information')
       })
-      .catch(() => alert("please try again"))
+      .catch(() => toast.error("please try again"))
   }
 
 

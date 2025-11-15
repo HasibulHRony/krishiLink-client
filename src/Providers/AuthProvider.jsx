@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     }
 
 
-    const updateProfileInfo = (userInfo ,updatedInfo) => {
+    const updateProfileInfo = (userInfo, updatedInfo) => {
         return updateProfile(userInfo, updatedInfo)
     }
 

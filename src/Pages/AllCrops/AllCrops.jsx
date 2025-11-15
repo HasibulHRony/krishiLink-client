@@ -18,7 +18,6 @@ export const AllCrops = () => {
     fetch(`http://localhost:3000/search?search=${search_input}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setSearchData([...data])
         setLoading(false)
       })

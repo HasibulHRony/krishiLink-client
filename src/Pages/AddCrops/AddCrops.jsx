@@ -8,7 +8,6 @@ export const AddCrops = () => {
   const navigate = useNavigate()
 
   const { user } = useContext(AuthContext)
-  console.log(user)
 
   const handleAddCrops = (e) => {
     e.preventDefault()

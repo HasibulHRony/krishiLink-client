@@ -13,7 +13,6 @@ export const MyPosts = () => {
       .then(res => res.json())
       .then(data => {
         setMyPost([...data])
-        console.log(data)
       })
   }, [user.email])
 
